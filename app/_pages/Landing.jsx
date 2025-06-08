@@ -24,6 +24,27 @@ const Landing = () => {
   const { blogs } = useBlog();
   const featuredBlogs = blogs.slice(0, 3);
 
+  // Add animation effect on scroll
+  useEffect(() => {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate-fadeIn');
+        }
+      });
+    }, { threshold: 0.1 });
+    
+    document.querySelectorAll('.animate-on-scroll').forEach(element => {
+      observer.observe(element);
+    });
+    
+    return () => {
+      document.querySelectorAll('.animate-on-scroll').forEach(element => {
+        observer.unobserve(element);
+      });
+    };
+  }, []);
+
   const features = [
     {
       icon: <Sparkles className="h-8 w-8 text-purple-500" />,
@@ -43,6 +64,17 @@ const Landing = () => {
       description:
         "Built by developers, for developers. Perfect syntax highlighting and code sharing.",
     },
+    {
+      icon: <Briefcase className="h-8 w-8 text-amber-500" />,
+      title: "Remote Work Ready",
+      description:
+        "Showcase your skills to global employers and position yourself for exciting remote opportunities.",
+    },
+  ];
+
+  const skills = [
+    "React", "Next.js", "Tailwind CSS", "JavaScript", "TypeScript", "UI/UX Design", 
+    "Responsive Design", "API Integration", "Performance Optimization", "Git/GitHub"
   ];
 
   const stats = [

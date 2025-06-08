@@ -1,10 +1,9 @@
-import Image from "next/image";
-import Landing from "./_pages/Landing";
+import Banner from "./_pages/Banner";
 
 export default function Home() {
   return (
     <>
-    <Landing />
+      <Banner />
     </>
   );
 }
